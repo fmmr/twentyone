@@ -41,7 +41,7 @@ class TwentyOne {
      * At the end, the solution should print the name of the winner to standard out, together with the hands of both the dealer
      * and Sam. Using the following format
      */
-    private static void report(Player sam, Player dealer, Player winner) {
+    static void report(Player sam, Player dealer, Player winner) {
         System.out.println(winner.getName());
         System.out.println(sam);
         System.out.println(dealer);

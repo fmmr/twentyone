@@ -31,18 +31,6 @@ public enum Value {
         return s;
     }
 
-    public boolean greaterThan(Value otherValue) {
-        return score > otherValue.score;
-    }
-
-    public boolean greaterThanOrEqual(Value otherValue) {
-        return score >= otherValue.score;
-    }
-
-    public int sum(Value otherValue) {
-        return score + otherValue.score;
-    }
-
     public int getScore() {
         return score;
     }

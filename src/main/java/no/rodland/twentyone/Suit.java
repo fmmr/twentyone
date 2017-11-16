@@ -6,10 +6,7 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 enum Suit {
-    Clubs("C"),
-    Diamonds("D"),
-    Hearts("H"),
-    Spades("S");
+    Clubs("C"), Diamonds("D"), Hearts("H"), Spades("S");
 
     private static final Function<Suit, List<Card>> ALL_CARDS = s -> Arrays.stream(Value.values())
                                                                            .map(v -> new Card(s, v))

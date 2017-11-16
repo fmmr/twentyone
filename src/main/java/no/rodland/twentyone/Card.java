@@ -48,14 +48,6 @@ public class Card {
         return 31 * suit.hashCode() + value.hashCode();
     }
 
-    public boolean greaterThan(Card otherCard) {
-        return value.greaterThan(otherCard.value);
-    }
-
-    public boolean greaterThanOrEqual(Card otherCard) {
-        return value.greaterThanOrEqual(otherCard.value);
-    }
-
     public int getScore() {
         return value.getScore();
     }

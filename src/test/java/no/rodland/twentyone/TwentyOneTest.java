@@ -35,7 +35,7 @@ public class TwentyOneTest {
     }
 
     @Test
-    public void initial_deal_example_from_doc() {
+    public void example_from_doc_with_initial_deal_from_actual_implementation_still_without_game() {
         Deck deck = new Deck("CA, D5, H9, HQ, S8,");
         TwentyOne game = new TwentyOne(deck, SAM, DEALER);
         game.initialDeal();

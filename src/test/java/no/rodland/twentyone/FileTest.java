@@ -19,7 +19,7 @@ public class FileTest {
     }
 
     @Test
-    public void read_from_classpath() throws IOException, URISyntaxException {
+    public void read_file_from_main_classpath() throws IOException, URISyntaxException {
         final Deck deck = TwentyOne.readDeckFromFile("test_deck_1.txt");
         TwentyOne game = new TwentyOne(deck, SAM, DEALER);
         final Player winner = game.play();
@@ -27,7 +27,7 @@ public class FileTest {
     }
 
     @Test
-    public void read_from_test_classpath() throws IOException, URISyntaxException {
+    public void read_file_from_test_classpath() throws IOException, URISyntaxException {
         final Deck deck = TwentyOne.readDeckFromFile("test_deck_2.txt");
         TwentyOne game = new TwentyOne(deck, SAM, DEALER);
         final Player winner = game.play();

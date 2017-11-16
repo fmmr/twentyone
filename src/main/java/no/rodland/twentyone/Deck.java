@@ -26,14 +26,11 @@ class Deck {
         checkUniqueness();
     }
 
-    private static LinkedList<Card> getCardsFromString(String cardAsCode) {
-        final List<Card> cardsFromString = Arrays.stream(cardAsCode.split("[, ]+"))
-                                                 .filter(str -> !str.isEmpty())
-                                                 .map(Card::new)
-                                                 .collect(Collectors.toList());
-        LinkedList<Card> c = new LinkedList<>();
-        c.addAll(cardsFromString);
-        return c;
+    private static Collection<Card> getCardsFromString(String cardAsCode) {
+        return Arrays.stream(cardAsCode.split("[, ]+"))
+                     .filter(str -> !str.isEmpty())
+                     .map(Card::new)
+                     .collect(Collectors.toList());
     }
 
     private void checkUniqueness() {
@@ -43,7 +40,7 @@ class Deck {
         }
     }
 
-    private static List<Card> getShuffledDeck() {
+    private static Collection<Card> getShuffledDeck() {
         final List<Card> collect = Arrays.stream(Suit.values())
                                          .map(Suit::allCards)
                                          .flatMap(Collection::stream)
