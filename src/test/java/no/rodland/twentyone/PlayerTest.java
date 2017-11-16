@@ -42,4 +42,25 @@ public class PlayerTest {
         SAM.deal(new Card(Suit.Clubs, Value.King));
         assertEquals("sam: S3, HK, CK", SAM.toString());
     }
+
+    @Test
+    public void score_without_cards() {
+        assertEquals(0, SAM.getScore());
+    }
+
+    @Test
+    public void score_with_some_cards() {
+        SAM.deal(new Card(Suit.Spades, Value.Three));
+        SAM.deal(new Card(Suit.Hearts, Value.King));
+        SAM.deal(new Card(Suit.Clubs, Value.King));
+        assertEquals(23, SAM.getScore());
+    }
+
+    @Test
+    public void score_with_some_cards_including_ace() {
+        SAM.deal(new Card(Suit.Spades, Value.Three));
+        SAM.deal(new Card(Suit.Hearts, Value.Two));
+        SAM.deal(new Card(Suit.Clubs, Value.Ace));
+        assertEquals(16, SAM.getScore());
+    }
 }
