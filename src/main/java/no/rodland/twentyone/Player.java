@@ -6,13 +6,7 @@ import java.util.stream.Collectors;
 
 public class Player {
     private final String name;
-    private List<Card> hand = new ArrayList<>();
-
-
-    public void deal(Card card) {
-        hand.add(card);
-    }
-
+    private final List<Card> hand = new ArrayList<>();
 
     Player(String name) {
         this.name = name;
@@ -21,10 +15,14 @@ public class Player {
         }
     }
 
-    //    public int sumOfHand() {
-//        return hand.stream().mapToInt(Card::getValue).sum();
-//    }
-//
+    public void deal(Card card) {
+        hand.add(card);
+    }
+
+    public int getScore() {
+        return hand.stream().mapToInt(Card::getScore).sum();
+    }
+
     @Override
     public String toString() {
         return name + ": " + (hand.stream().map(Card::toString).collect(Collectors.joining(", ")));

@@ -6,35 +6,37 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class Deck {
+class Deck {
     private final LinkedList<Card> cards;
 
-    Deck(String cardAsCode) {
-        final List<Card> allCards = Arrays.stream(cardAsCode.split("[, ]+"))
-                                          .filter(str -> !str.isEmpty())
-                                          .map(Card::new)
-                                          .collect(Collectors.toList());
-        cards = new LinkedList<>();
-        cards.addAll(allCards);
-        checkUniquness(cards);
-    }
-
     Deck() {
-        final List<Card> allCards = getAllCards();
-        Collections.shuffle(allCards);
-        cards = new LinkedList<>();
-        cards.addAll(allCards);
-        checkUniquness(cards);
+        this(getAllCards());
     }
 
-    public Card pop() {
-        return cards.pop();
+    Deck(String cardAsCode) {
+        this(getCardsFromString(cardAsCode));
     }
 
-    static void checkUniquness(List<Card> cards) {
+    Deck(Collection<Card> cards) {
+        this.cards = new LinkedList<>(cards);
+        checkUniqueness(this.cards);
+    }
+
+    private static LinkedList<Card> getCardsFromString(String cardAsCode) {
+        final List<Card> cardsFromString = Arrays.stream(cardAsCode.split("[, ]+"))
+                                                 .filter(str -> !str.isEmpty())
+                                                 .map(Card::new)
+                                                 .collect(Collectors.toList());
+        LinkedList<Card> c = new LinkedList<>();
+        c.addAll(cardsFromString);
+        return c;
+    }
+
+    static void checkUniqueness(Collection<Card> cards) {
         Set<Card> set = new HashSet<>(cards);
         if (set.size() != cards.size()) {
             throw new IllegalStateException("Duplicate cards not allowed in a deck");
@@ -42,11 +44,23 @@ public class Deck {
     }
 
     private static List<Card> getAllCards() {
-        return Arrays.stream(Suit.values())
-                     .map(Suit::allCards)
-                     .flatMap(Collection::stream)
-                     .collect(Collectors.toList());
+        final List<Card> collect = Arrays.stream(Suit.values())
+                                         .map(Suit::allCards)
+                                         .flatMap(Collection::stream)
+                                         .collect(Collectors.toList());
+        Collections.shuffle(collect);
+        return collect;
 
+    }
+
+    public Card pop() {
+        final Card pop;
+        try {
+            pop = cards.pop();
+        } catch (NoSuchElementException e) {
+            throw new NoSuchElementException("Deck is empty - probably started out with a non-full deck of cards.");
+        }
+        return pop;
     }
 
     public int getNumberOfCards() {

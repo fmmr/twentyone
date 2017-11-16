@@ -5,13 +5,12 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public class Card {
-    private final Suit suit;
-    private final Value value;
-
     private static final Map<String, Suit> reverseSuits = Arrays.stream(Suit.values())
                                                                 .collect(Collectors.toMap(Suit::toString, s -> s));
     private static final Map<String, Value> reverseValues = Arrays.stream(Value.values())
                                                                   .collect(Collectors.toMap(Value::toString, v -> v));
+    private final Suit suit;
+    private final Value value;
 
     public Card(String s) {
         this(s.substring(0, 1), s.substring(1));
@@ -55,5 +54,9 @@ public class Card {
 
     public boolean greaterThanOrEqual(Card otherCard) {
         return value.greaterThanOrEqual(otherCard.value);
+    }
+
+    public int getScore() {
+        return value.getScore();
     }
 }

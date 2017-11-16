@@ -33,20 +33,14 @@ public class DeckTest {
     }
 
     @Test(expected = IllegalStateException.class)
-    public void no_cheeting() {
-        Deck deck = new Deck(
-                "DK, H3, H3, SK, HA, CA, C10, H2");
-        final Collection<Card> cards = deck.getCards();
-        List<Card> list = new ArrayList<>(cards);
-        assertThat(new Card(Suit.Spades, Value.King), is(list.get(3)));
-        assertEquals(8, deck.getNumberOfCards());
+    public void no_cheating() {
+        new Deck("DK, H3, H3, SK, HA, CA, C10, H2");
     }
 
     @Test
     public void test_a_card_is_in_the_deck() {
         final Deck deck = new Deck();
         final Collection<Card> cards = deck.getCards();
-        System.out.println("deck = " + deck);
         assertThat(cards, hasItem(new Card(Suit.Diamonds, Value.Jack)));
     }
 
@@ -84,7 +78,7 @@ public class DeckTest {
         list.add(new Card(Suit.Spades, Value.Two));
         list.add(new Card(Suit.Spades, Value.Three));  // Duplicate
         list.add(new Card(Suit.Diamonds, Value.Three));
-        Deck.checkUniquness(list);
+        Deck.checkUniqueness(list);
     }
 
 
